@@ -4,6 +4,7 @@ const anypointmq = require('./lib/anypointmq.js');
 
 module.exports = async function (context, blob) {
     const credentials = await credentials.getCredentials();
+    context.log("using credentials", credentials);
     anypointmq.putMessage(JSON.parse(credentials), JSON.stringify(
             {
                 body: { container: "xom",fileName: + context.bindingData.name }
