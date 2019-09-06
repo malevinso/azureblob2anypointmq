@@ -15,3 +15,6 @@ module.exports = async function (context, blob) {
     //context.log(Object.getOwnPropertyNames(context.bindingData.metadata));
     //context.log("JavaScript blob trigger function processed blob \n Name:", context.bindingData.name, "\n Blob Size:", blob.length, "Bytes");
 };
+
+//const credentialss =  credentials.getCredentials();
+//console.log(credentialss);
