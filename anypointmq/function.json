@@ -1,0 +1,12 @@
+{
+    "bindings": [
+        {
+            "name": "file",
+            "type": "blobTrigger",
+            "direction": "in",
+            "path": "blobs/{name}",
+            "connection": "blob2anypointmq_STORAGE"
+        }
+    ],
+    "disabled": false
+}
