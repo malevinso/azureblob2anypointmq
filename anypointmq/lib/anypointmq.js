@@ -16,7 +16,7 @@ const authenticate = async (clientId, clientSecret, grantType) => {
     return token
   }
   catch(err) {
-    context.log("problems when trying to access AnypointMQ", err);
+    throw("problems when trying to access AnypointMQ " + err);
   }
 }
 
@@ -28,11 +28,11 @@ const putMessage = async (credentials, content) => {
     const resp = await fetch(ANYPOINTMQ_URL, { method: 'PUT', headers: REQ_HEADERS, body: JSON.stringify(content)});
     if(resp.status == 201) return resp;
     else {
-      throw {message: "Error when sending message to AnypointMQ", error: resp}; 
+      throw ("Error when sending message to AnypointMQ " + content); 
 
     }
   } catch(err) {
-    context.log("Error when trying to send the message to AnypointMQ" + err);
+    throw("Error when trying to send the message to AnypointMQ " + err);
   }
 
 }
