@@ -9,23 +9,22 @@ const redisClient = redis.createClient( config.REDIS_PORT,
                                         });
 
 redisClient.on("error", (err) => {
-  context.log("Error", err)
+  throw(err);
 });
 
 const getCredentials = async () => {
   try {
     let credentials = await redisClient.get("credentials");
-    context.log("Used credentials from Redis", credentials);
     if(!credentials) {
       credentials = await anypointmq.authenticate(config.ANYPOINTMQ_CLIENTID,
                                                 config.ANYPOINTMQ_CLIENTSECRET,
                                                 config.ANYPOINTMQ_GRANTTYPE);
-      await redisClient.set("credentials", JSON.stringify(credentials), "EX", "600");
-      context.log("used credentials from AnypointMQ");
+      credentials = JSON.stringify(credentials);
+      await redisClient.set("credentials", credentials, "EX", "600");
     }
     return credentials;
   } catch(err) {
-    context.log("Error when getting credentials", err);
+    throw(err);
   }
 }
 
